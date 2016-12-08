@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace SetCoverProblem
 {
@@ -8,11 +9,12 @@ namespace SetCoverProblem
 		public readonly List<int> RowsExcluded;
 		public readonly List<int> ColumnsInSolution;
 
-		public SimplificationInfo(List<int> columnsExcluded, List<int> rowsExcluded, List<int> columnsInSolution)
+		public SimplificationInfo(IEnumerable<int> columnsExcluded, IEnumerable<int> rowsExcluded, 
+			IEnumerable<int> columnsInSolution)
 		{
-			ColumnsExcluded = columnsExcluded;
-			RowsExcluded = rowsExcluded;
-			ColumnsInSolution = columnsInSolution;
+			ColumnsExcluded = columnsExcluded.Distinct().OrderBy(x => x).ToList();
+			RowsExcluded = rowsExcluded.Distinct().OrderBy(x => x).ToList();
+			ColumnsInSolution = columnsInSolution.Distinct().OrderBy(x => x).ToList();
 		}
 	}
 }
