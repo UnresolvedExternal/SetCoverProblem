@@ -138,5 +138,26 @@ namespace SetCoverProblem
 					matrix[y, x] = source[x, y];
 			return matrix;
 		}
+
+		public static int GetMaxSumColumn(this int[,] source, int[] isInvalidColumn, int[] isInvalidRow)
+		{
+			if (source == null) throw new ArgumentNullException(nameof(source));
+			if (isInvalidColumn == null) throw new ArgumentNullException(nameof(isInvalidColumn));
+			if (isInvalidRow == null) throw new ArgumentNullException(nameof(isInvalidRow));
+
+			int max = 0;
+			int maxIndex = 0;
+			for (int x = 0; x < isInvalidColumn.Length; x++)
+				if (isInvalidColumn[x] == 0)
+				{
+					int sum = source.SumColumn(x, isInvalidRow);
+					if (sum > max)
+					{
+						max = sum;
+						maxIndex = x;
+					}
+				}
+			return maxIndex;
+		}
 	}
 }

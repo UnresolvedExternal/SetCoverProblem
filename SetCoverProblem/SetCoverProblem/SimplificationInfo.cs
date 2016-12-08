@@ -16,5 +16,12 @@ namespace SetCoverProblem
 			RowsExcluded = rowsExcluded.Distinct().OrderBy(x => x).ToList();
 			ColumnsInSolution = columnsInSolution.Distinct().OrderBy(x => x).ToList();
 		}
+
+		public int[,] ApplySimplification(int[,] source)
+		{
+			source = source.RemoveColumns(ColumnsExcluded);
+			source = source.RemoveRows(RowsExcluded);
+			return source;
+		}
 	}
 }
