@@ -34,42 +34,11 @@ namespace SetCoverTests
 		}
 
 		[Test]
-		public void _0_1x1_Test()
-		{
-			int[,] source =
-			{
-				{0}
-			};
-			source = source.Transpose();
-			var expected = new SimplificationInfo(new[] { 0 }, new[] { 0 }, new[] { 0 });
-
-			var actual = new Simplificator(source).GetSimplificationInfo();
-
-			AssertEqual(actual, expected);
-		}
-
-		[Test]
 		public void _0x0_Test()
 		{
 			int[,] source = new int[0, 0];
 			source = source.Transpose();
 			var expected = new SimplificationInfo(new int[0], new int[0], new int[0]);
-
-			var actual = new Simplificator(source).GetSimplificationInfo();
-
-			AssertEqual(actual, expected);
-		}
-
-		[Test]
-		public void _10_1x2_Test()
-		{
-			int[,] source =
-			{
-				{1},
-				{0}
-			};
-			source = source.Transpose();
-			var expected = new SimplificationInfo(new[] { 0 }, new[] { 0 }, new[] { 0 });
 
 			var actual = new Simplificator(source).GetSimplificationInfo();
 
@@ -135,7 +104,7 @@ namespace SetCoverTests
 				{0, 0, 0, 0, 1}
 			};
 			source = source.Transpose();
-			var expected = new SimplificationInfo(new[] { 0, 1, 2, 3, 4 }, new[] { 0, 1, 2, 3, 4 }, new[] { 0, 1, 2, 3, 4 });
+			var expected = new SimplificationInfo(new[] { 0, 1, 2, 3, 4 }, new[] { 0, 1, 2, 3, 4 }, new[] { 0, 1, 2, 4 });
 
 			var actual = new Simplificator(source).GetSimplificationInfo();
 
