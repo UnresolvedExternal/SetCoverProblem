@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SetCoverProblem
 {
-	static class MatrixExstensions
+	public static class MatrixExstensions
 	{
 		public static int[,] RemoveColumns(this int[,] source, List<int> columnsIndexes)
 		{
@@ -42,7 +42,7 @@ namespace SetCoverProblem
 				}
 				else
 				{
-					for (int x = 0; y < source.GetLength(0); x++)
+					for (int x = 0; x < source.GetLength(0); x++)
 						matrix[x, y + rowsShift] = source[x, y];
 				}
 			}
@@ -126,6 +126,17 @@ namespace SetCoverProblem
 				if (isInvalidColumn[x] == 0 && source[x, yOne] == 0 && source[x, yTwo] == 1)
 					return false;
 			return true;
+		}
+
+		public static int[,] Transpose(this int[,] source)
+		{
+			if (source == null) throw new ArgumentNullException(nameof(source));
+
+			var matrix = new int[source.GetLength(1), source.GetLength(0)];
+			for (int x = 0; x < source.GetLength(0); ++x)
+				for (int y = 0; y < source.GetLength(1); y++)
+					matrix[y, x] = source[x, y];
+			return matrix;
 		}
 	}
 }

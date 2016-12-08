@@ -11,7 +11,7 @@ namespace SetCoverProblem
 		Included
 	}
 
-	class Simplificator
+	public class Simplificator
 	{
 		private readonly int[,] _source;
 		private readonly bool[] _rowsCovered;

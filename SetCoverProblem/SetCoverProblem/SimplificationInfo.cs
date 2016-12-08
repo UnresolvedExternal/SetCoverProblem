@@ -2,7 +2,7 @@
 
 namespace SetCoverProblem
 {
-	class SimplificationInfo
+	public class SimplificationInfo
 	{
 		public readonly List<int> ColumnsExcluded;
 		public readonly List<int> RowsExcluded;
