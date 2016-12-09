@@ -13,7 +13,7 @@ namespace SetCoverTests
 			Assert.That(actual.ColumnsInSolution, Is.EqualTo(expected.ColumnsInSolution));
 		}
 
-		[Test]
+		[Test, Timeout(1000)]
 		public void _1_1x1_Test()
 		{
 			int[,] source =
@@ -28,7 +28,7 @@ namespace SetCoverTests
 			AssertEqual(actual, expected);
 		}
 
-		[Test]
+		[Test, Timeout(1000)]
 		public void _0x0_Test()
 		{
 			int[,] source = new int[0, 0];
@@ -40,7 +40,7 @@ namespace SetCoverTests
 			AssertEqual(actual, expected);
 		}
 
-		[Test]
+		[Test, Timeout(1000)]
 		public void _11_1x2_Test()
 		{
 			int[,] source =
@@ -56,7 +56,7 @@ namespace SetCoverTests
 			AssertEqual(actual, expected);
 		}
 
-		[Test]
+		[Test, Timeout(1000)]
 		public void _100_3x1_Test()
 		{
 			int[,] source =
@@ -71,7 +71,7 @@ namespace SetCoverTests
 			AssertEqual(actual, expected);
 		}
 
-		[Test]
+		[Test, Timeout(1000)]
 		public void _110_101_3x2_Test()
 		{
 			int[,] source =
@@ -87,7 +87,7 @@ namespace SetCoverTests
 			AssertEqual(actual, expected);
 		}
 
-		[Test]
+		[Test, Timeout(1000)]
 		public void CompleteSimplification_5x5_Test()
 		{
 			int[,] source =
@@ -106,7 +106,7 @@ namespace SetCoverTests
 			AssertEqual(actual, expected);
 		}
 
-		[Test]
+		[Test, Timeout(1000)]
 		public void SmallSimplification_5x5_Test()
 		{
 			int[,] source =

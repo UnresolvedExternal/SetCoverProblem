@@ -7,7 +7,7 @@ namespace SetCoverTests
 	[TestFixture]
 	public class MatrixExtensionsTests
 	{
-		[Test]
+		[Test, Timeout(1000)]
 		public void RemoveColumnsTest1()
 		{
 			int[,] source =
@@ -35,7 +35,7 @@ namespace SetCoverTests
 			Assert.That(actual, Is.EqualTo(expected));
 		}
 
-		[Test]
+		[Test, Timeout(1000)]
 		public void RemoveColumnsTest2()
 		{
 			int[,] source =
@@ -56,7 +56,7 @@ namespace SetCoverTests
 			Assert.That(actual, Is.EqualTo(expected));
 		}
 
-		[Test]
+		[Test, Timeout(1000)]
 		public void RemoveRowsTest1()
 		{
 			int[,] source =
@@ -82,7 +82,7 @@ namespace SetCoverTests
 			Assert.That(actual, Is.EqualTo(expected));
 		}
 
-		[Test]
+		[Test, Timeout(1000)]
 		public void RemoveRowsTest2()
 		{
 			int[,] source =
@@ -104,7 +104,7 @@ namespace SetCoverTests
 			Assert.That(actual, Is.EqualTo(expected));
 		}
 
-		[Test]
+		[Test, Timeout(1000)]
 		public void IsColumnOneSupersetOfColumnTwoTest()
 		{
 			int[,] source =
@@ -126,7 +126,7 @@ namespace SetCoverTests
 				Assert.That(source.IsColumnOneSupersetOfColumnTwo(x, x, isInvalidRow));
 		}
 
-		[Test]
+		[Test, Timeout(1000)]
 		public void IsRowOneSupersetOfRowTwoTest()
 		{
 			int[,] source =
@@ -150,7 +150,7 @@ namespace SetCoverTests
 				Assert.That(source.IsRowOneSupersetOfRowTwo(y, y, isInvalidColumn), Is.True);
 		}
 
-		[Test]
+		[Test, Timeout(1000)]
 		public void FindAndSumTest()
 		{
 			int[,] source =

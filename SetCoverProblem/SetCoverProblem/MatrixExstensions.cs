@@ -145,8 +145,8 @@ namespace SetCoverProblem
 			if (isInvalidColumn == null) throw new ArgumentNullException(nameof(isInvalidColumn));
 			if (isInvalidRow == null) throw new ArgumentNullException(nameof(isInvalidRow));
 
-			int max = 0;
-			int maxIndex = 0;
+			int max = int.MinValue;
+			int maxIndex = -1;
 			for (int x = 0; x < isInvalidColumn.Length; x++)
 				if (isInvalidColumn[x] == 0)
 				{

@@ -11,6 +11,7 @@ namespace SetCoverProblem
 		private readonly int[] _isColumnTaken;
 		private readonly int[] _isRowCovered;
 		private readonly int[] _index;
+		private bool _isSolutionFound;
 		private int _currentCost;
 
 		public MainAlgorithm(int[,] source, List<int> bestSolution)
@@ -27,13 +28,15 @@ namespace SetCoverProblem
 
 		public List<int> GetSolution()
 		{
-			_currentCost = 0;
+			if (_isSolutionFound)
+				return _bestSolution;
 			int index = 0;
 			do
 			{
 				index = ProcessTakingColumns(index);
 				ProcessBacktracking();
 			} while (IndexExists());
+			_isSolutionFound = true;
 			return _bestSolution;
 		}
 
@@ -62,7 +65,7 @@ namespace SetCoverProblem
 				}
 
 				index++;
-				int x = _source.GetMaxSumColumn(_isColumnTaken, _isRowCovered);
+				int x = _source.GetMaxSumColumn(_index, _isRowCovered);
 				TakeColumn(x, 1, index);
 			}
 			return index;
