@@ -46,7 +46,7 @@ namespace SetCoverProblem
 		private bool ExcludeSupersetRows()
 		{
 			bool modified = false;
-			int[] isInvalidColumn = _columnsInfo.Select(i => i == ColumnInfo.Unknown ? 0 : 1).ToArray();
+			int[] isColumnInvalid = _columnsInfo.Select(i => i == ColumnInfo.Unknown ? 0 : 1).ToArray();
 			for (int yOne = 0; yOne < _source.GetLength(1); yOne++)
 			{
 				if (_rowsCovered[yOne])
@@ -55,7 +55,7 @@ namespace SetCoverProblem
 				{
 					if (_rowsCovered[yTwo])
 						continue;
-					if (yOne != yTwo && _source.IsRowOneSupersetOfRowTwo(yTwo, yOne, isInvalidColumn))
+					if (yOne != yTwo && _source.IsRowOneSupersetOfRowTwo(yTwo, yOne, isColumnInvalid))
 					{
 						modified = true;
 						ExcludeRow(yTwo);
@@ -110,7 +110,7 @@ namespace SetCoverProblem
 		private bool ExcludeSubsetColumns()
 		{
 			bool modified = false;
-			int[] isInvalidRow = _rowsCovered.Select(covered => covered ? 1 : 0).ToArray();
+			int[] isRowInvalid = _rowsCovered.Select(covered => covered ? 1 : 0).ToArray();
 			for (int xOne = 0; xOne < _source.GetLength(0); xOne++)
 			{
 				if (_columnsInfo[xOne] != ColumnInfo.Unknown)
@@ -119,7 +119,7 @@ namespace SetCoverProblem
 				{
 					if (_columnsInfo[xTwo] != ColumnInfo.Unknown)
 						continue;
-					if (xOne != xTwo && _source.IsColumnOneSupersetOfColumnTwo(xOne, xTwo, isInvalidRow))
+					if (xOne != xTwo && _source.IsColumnOneSupersetOfColumnTwo(xOne, xTwo, isRowInvalid))
 					{
 						modified = true;
 						ExcludeColumn(xTwo, false);
@@ -132,14 +132,14 @@ namespace SetCoverProblem
 		private bool CoverOneUnitRows()
 		{
 			bool modified = false;
-			int[] isInvalidColumn = _columnsInfo.Select(i => i == ColumnInfo.Excluded ? 1 : 0).ToArray();
+			int[] isColumnInvalid = _columnsInfo.Select(i => i == ColumnInfo.Excluded ? 1 : 0).ToArray();
 			for (int y = 0; y < _source.GetLength(1); y++)
 				if (!_rowsCovered[y])
 				{
-					int sum = _source.SumRow(y, isInvalidColumn);
+					int sum = _source.SumRow(y, isColumnInvalid);
 					if (sum == 1)
 					{
-						int firstOne = _source.FindInRow(y, 1, isInvalidColumn);
+						int firstOne = _source.FindInRow(y, 1, isColumnInvalid);
 						modified = true;
 						ExcludeColumn(firstOne, true);
 					}

@@ -60,70 +60,70 @@ namespace SetCoverProblem
 			return matrix;
 		}
 
-		public static int FindInColumn(this int[,] source, int x, int value, int[] isInvalidRow)
+		public static int FindInColumn(this int[,] source, int x, int value, int[] isRowInvalid)
 		{
 			if (source == null) throw new ArgumentNullException(nameof(source));
-			if (isInvalidRow == null) throw new ArgumentNullException(nameof(isInvalidRow));
+			if (isRowInvalid == null) throw new ArgumentNullException(nameof(isRowInvalid));
 
 			for (int y = 0; y < source.GetLength(1); y++)
-				if (isInvalidRow[y] == 0 && source[x, y] == value)
+				if (isRowInvalid[y] == 0 && source[x, y] == value)
 					return y;
 			return -1;
 		}
 
-		public static int FindInRow(this int[,] source, int y, int value, int[] isInvalidColumn)
+		public static int FindInRow(this int[,] source, int y, int value, int[] isColumnInvalid)
 		{
 			if (source == null) throw new ArgumentNullException(nameof(source));
-			if (isInvalidColumn == null) throw new ArgumentNullException(nameof(isInvalidColumn));
+			if (isColumnInvalid == null) throw new ArgumentNullException(nameof(isColumnInvalid));
 
 			for (int x = 0; x < source.GetLength(0); x++)
-				if (isInvalidColumn[x] == 0 && source[x, y] == value)
+				if (isColumnInvalid[x] == 0 && source[x, y] == value)
 					return x;
 			return -1;
 		}
 
-		public static int SumRow(this int[,] source, int y, int[] isInvalidColumn)
+		public static int SumRow(this int[,] source, int y, int[] isColumnInvalid)
 		{
 			if (source == null) throw new ArgumentNullException(nameof(source));
-			if (isInvalidColumn == null) throw new ArgumentNullException(nameof(isInvalidColumn));
+			if (isColumnInvalid == null) throw new ArgumentNullException(nameof(isColumnInvalid));
 
 			int sum = 0;
 			for (int x = 0; x < source.GetLength(0); x++)
-				if (isInvalidColumn[x] == 0)
+				if (isColumnInvalid[x] == 0)
 					sum += source[x, y];
 			return sum;
 		}
 
-		public static int SumColumn(this int[,] source, int x, int[] isInvalidRow)
+		public static int SumColumn(this int[,] source, int x, int[] isRowInvalid)
 		{
 			if (source == null) throw new ArgumentNullException(nameof(source));
-			if (isInvalidRow == null) throw new ArgumentNullException(nameof(isInvalidRow));
+			if (isRowInvalid == null) throw new ArgumentNullException(nameof(isRowInvalid));
 
 			int sum = 0;
 			for (int y = 0; y < source.GetLength(1); y++)
-				if (isInvalidRow[y] == 0)
+				if (isRowInvalid[y] == 0)
 					sum += source[x, y];
 			return sum;
 		}
 
-		public static bool IsColumnOneSupersetOfColumnTwo(this int[,] source, int xOne, int xTwo, int[] isInvalidRow)
+		public static bool IsColumnOneSupersetOfColumnTwo(this int[,] source, int xOne, int xTwo, int[] isRowInvalid)
 		{
 			if (source == null) throw new ArgumentNullException(nameof(source));
-			if (isInvalidRow == null) throw new ArgumentNullException(nameof(isInvalidRow));
+			if (isRowInvalid == null) throw new ArgumentNullException(nameof(isRowInvalid));
 
 			for (int y = 0; y < source.GetLength(1); y++)
-				if (isInvalidRow[y] == 0 && source[xOne, y] == 0 && source[xTwo, y] == 1)
+				if (isRowInvalid[y] == 0 && source[xOne, y] == 0 && source[xTwo, y] == 1)
 					return false;
 			return true;
 		}
 
-		public static bool IsRowOneSupersetOfRowTwo(this int[,] source, int yOne, int yTwo, int[] isInvalidColumn)
+		public static bool IsRowOneSupersetOfRowTwo(this int[,] source, int yOne, int yTwo, int[] isColumnInvalid)
 		{
 			if (source == null) throw new ArgumentNullException(nameof(source));
-			if (isInvalidColumn == null) throw new ArgumentNullException(nameof(isInvalidColumn));
+			if (isColumnInvalid == null) throw new ArgumentNullException(nameof(isColumnInvalid));
 
 			for (int x = 0; x < source.GetLength(0); x++)
-				if (isInvalidColumn[x] == 0 && source[x, yOne] == 0 && source[x, yTwo] == 1)
+				if (isColumnInvalid[x] == 0 && source[x, yOne] == 0 && source[x, yTwo] == 1)
 					return false;
 			return true;
 		}
@@ -139,18 +139,18 @@ namespace SetCoverProblem
 			return matrix;
 		}
 
-		public static int GetMaxSumColumn(this int[,] source, int[] isInvalidColumn, int[] isInvalidRow)
+		public static int GetMaxSumColumn(this int[,] source, int[] isColumnInvalid, int[] isRowInvalid)
 		{
 			if (source == null) throw new ArgumentNullException(nameof(source));
-			if (isInvalidColumn == null) throw new ArgumentNullException(nameof(isInvalidColumn));
-			if (isInvalidRow == null) throw new ArgumentNullException(nameof(isInvalidRow));
+			if (isColumnInvalid == null) throw new ArgumentNullException(nameof(isColumnInvalid));
+			if (isRowInvalid == null) throw new ArgumentNullException(nameof(isRowInvalid));
 
 			int max = int.MinValue;
 			int maxIndex = -1;
-			for (int x = 0; x < isInvalidColumn.Length; x++)
-				if (isInvalidColumn[x] == 0)
+			for (int x = 0; x < isColumnInvalid.Length; x++)
+				if (isColumnInvalid[x] == 0)
 				{
-					int sum = source.SumColumn(x, isInvalidRow);
+					int sum = source.SumColumn(x, isRowInvalid);
 					if (sum > max)
 					{
 						max = sum;
