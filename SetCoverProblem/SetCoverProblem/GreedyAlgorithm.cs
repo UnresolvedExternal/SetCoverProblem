@@ -16,11 +16,12 @@ namespace SetCoverProblem
 			_isRowCovered = new int[source.GetLength(1)];
 		}
 
-		public List<int> GetAnswer()
+		public List<int> GetSolution()
 		{
 			while (!IsCovered())
 			{
 				int x = _source.GetMaxSumColumn(_isColumnTaken, _isRowCovered);
+				_isColumnTaken[x] = 1;
 				for (int y = 0; y < _isRowCovered.Length; y++)
 					if (_source[x, y] == 1)
 						_isRowCovered[y] = 1;
@@ -30,7 +31,7 @@ namespace SetCoverProblem
 
 		private bool IsCovered()
 		{
-			return _isRowCovered.Any(e => e > 0);
+			return _isRowCovered.All(e => e > 0);
 		}
 	}
 }

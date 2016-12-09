@@ -46,6 +46,7 @@
     <Compile Include="GreedyAlgorithm.cs" />
     <Compile Include="MainAlgorithm.cs" />
     <Compile Include="MatrixExstensions.cs" />
+    <Compile Include="ProblemSolver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimplificationInfo.cs" />

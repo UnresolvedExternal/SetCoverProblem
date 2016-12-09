@@ -23,5 +23,30 @@ namespace SetCoverProblem
 			source = source.RemoveRows(RowsExcluded);
 			return source;
 		}
+
+		public List<int> GetOriginalSolution(List<int> solution)
+		{
+			return GetOriginalColumns(solution)
+				.Concat(ColumnsInSolution)
+				.OrderBy(x => x)
+				.ToList();
+		}
+
+		private List<int> GetOriginalColumns(List<int> columns)
+		{
+			var originalColumns = new List<int>();
+			int columnsRecovered = 0;
+			foreach (var column in columns)
+			{
+				int x = column + columnsRecovered;
+				while (ColumnsExcluded.Contains(x))
+				{
+					++columnsRecovered;
+					++x;
+				}
+				originalColumns.Add(x);
+			}
+			return originalColumns;
+		}
 	}
 }
