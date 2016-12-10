@@ -109,7 +109,7 @@ namespace SetCoverProblem
 			}
 			foreach (var i in invalidIndexes)
 				_index[i] = 0;
-			return threshold;
+			return uncoveredRows <= 0 ? threshold : int.MaxValue;
 		}
 
 		private bool IsCovered() => _isRowCovered.All(y => y != 0);

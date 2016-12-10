@@ -40,7 +40,7 @@ namespace SetCoverTests
 				{1}
 			};
 			source = source.Transpose();
-			var expected = new[] {0}.ToList();
+			var expected = new[] { 0 }.ToList();
 
 			var actual = new MainAlgorithm(source, Enumerable.Range(0, source.GetLength(0)).ToList()).GetSolution();
 
@@ -165,7 +165,7 @@ namespace SetCoverTests
 				{1,1,0 }
 			};
 			source = source.Transpose();
-			var expected = new[] { 0,1 }.ToList();
+			var expected = new[] { 0, 1 }.ToList();
 
 			var actual = new MainAlgorithm(source, Enumerable.Range(0, source.GetLength(0)).ToList()).GetSolution();
 
@@ -229,6 +229,26 @@ namespace SetCoverTests
 			};
 			source = source.Transpose();
 			var expected = new[] { 1, 3, 4 }.ToList();
+
+			var actual = new MainAlgorithm(source, Enumerable.Range(0, source.GetLength(0)).ToList()).GetSolution();
+
+			Assert.That(actual, Is.EqualTo(expected));
+		}
+
+		[Test]
+		public void _Crush_4x6_Test()
+		{
+			int[,] source =
+			{
+				{1, 0, 0, 1},
+				{0, 1, 0, 1},
+				{0, 1, 1, 0},
+				{1, 1, 0, 0},
+				{1, 0, 1, 0},
+				{0, 0, 1, 1}
+			};
+			source = source.Transpose();
+			var expected = new[] { 0, 1, 2 }.ToList();
 
 			var actual = new MainAlgorithm(source, Enumerable.Range(0, source.GetLength(0)).ToList()).GetSolution();
 
