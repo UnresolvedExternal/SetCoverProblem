@@ -39,11 +39,13 @@ namespace SetCoverProblem
 			foreach (var column in columns)
 			{
 				int x = column + columnsRecovered;
-				while (ColumnsExcluded.Contains(x))
+				int addition;
+				do
 				{
-					++columnsRecovered;
-					++x;
-				}
+					addition = ColumnsExcluded.Skip(columnsRecovered).Count(e => e <= x);
+					x += addition;
+					columnsRecovered += addition;
+				} while (addition != 0);
 				originalColumns.Add(x);
 			}
 			return originalColumns;

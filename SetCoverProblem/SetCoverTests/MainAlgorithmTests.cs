@@ -254,5 +254,27 @@ namespace SetCoverTests
 
 			Assert.That(actual, Is.EqualTo(expected));
 		}
+
+		[Test]
+		public void _WA_5x8_Test()
+		{
+			int[,] source =
+			{
+				{1, 0, 0, 1, 1},
+				{0, 0, 1, 1, 1},
+				{1, 0, 1, 1, 0},
+				{0, 1, 1, 0, 1},
+				{0, 1, 0, 0, 1},
+				{1, 0, 0, 1, 0},
+				{0, 0, 0, 1, 1},
+				{1, 1, 0, 0, 0}
+			};
+			source = source.Transpose();
+			var expected = new[] { 1, 3 }.ToList();
+
+			var actual = new MainAlgorithm(source, Enumerable.Range(0, source.GetLength(0)).ToList()).GetSolution();
+
+			Assert.That(actual, Is.EqualTo(expected));
+		}
 	}
 }

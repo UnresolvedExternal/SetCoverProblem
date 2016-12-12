@@ -124,5 +124,27 @@ namespace SetCoverTests
 
 			AssertEqual(actual, expected);
 		}
+
+		[Test, Timeout(1000)]
+		public void First4Simplification_5x8_Test()
+		{
+			int[,] source =
+			{
+				{1, 0, 0, 1, 1},
+				{0, 0, 1, 1, 1},
+				{1, 0, 1, 1, 0},
+				{0, 1, 1, 0, 1},
+				{0, 1, 0, 0, 1},
+				{1, 0, 0, 1, 0},
+				{0, 0, 0, 1, 1},
+				{1, 1, 0, 0, 0}
+			};
+			source = source.Transpose();
+			var expected = new SimplificationInfo(new[] { 2 }, new[] { 0,1,2,3 }, new int[0]);
+
+			var actual = new Simplificator(source).GetSimplificationInfo();
+
+			AssertEqual(actual, expected);
+		}
 	}
 }
