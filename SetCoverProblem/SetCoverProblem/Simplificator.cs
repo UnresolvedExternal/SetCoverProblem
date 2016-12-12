@@ -101,7 +101,7 @@ namespace SetCoverProblem
 			{
 				for (int y = 0; y < _source.GetLength(1); y++)
 				{
-					if (_source[x, y] == 1)
+					if (_source[x, y] != 0)
 						_rowsCovered[y] = true;
 				}
 			}

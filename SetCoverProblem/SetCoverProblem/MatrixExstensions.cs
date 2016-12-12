@@ -112,7 +112,7 @@ namespace SetCoverProblem
 			if (isRowInvalid == null) throw new ArgumentNullException(nameof(isRowInvalid));
 
 			for (int y = 0; y < source.GetLength(1); y++)
-				if (isRowInvalid[y] == 0 && source[xOne, y] == 0 && source[xTwo, y] == 1)
+				if (isRowInvalid[y] == 0 && source[xOne, y] == 0 && source[xTwo, y] != 0)
 					return false;
 			return true;
 		}
@@ -123,7 +123,7 @@ namespace SetCoverProblem
 			if (isColumnInvalid == null) throw new ArgumentNullException(nameof(isColumnInvalid));
 
 			for (int x = 0; x < source.GetLength(0); x++)
-				if (isColumnInvalid[x] == 0 && source[x, yOne] == 0 && source[x, yTwo] == 1)
+				if (isColumnInvalid[x] == 0 && source[x, yOne] == 0 && source[x, yTwo] != 0)
 					return false;
 			return true;
 		}

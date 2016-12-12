@@ -23,7 +23,7 @@ namespace SetCoverProblem
 				int x = _source.GetMaxSumColumn(_isColumnTaken, _isRowCovered);
 				_isColumnTaken[x] = 1;
 				for (int y = 0; y < _isRowCovered.Length; y++)
-					if (_source[x, y] == 1)
+					if (_source[x, y] != 0)
 						_isRowCovered[y] = 1;
 			}
 			return _isColumnTaken.Select((e, x) => x).Where(x => _isColumnTaken[x] > 0).ToList();

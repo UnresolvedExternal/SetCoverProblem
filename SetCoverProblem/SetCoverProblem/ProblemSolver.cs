@@ -24,7 +24,7 @@ namespace SetCoverProblem
 			{
 				bool canBeCovered = false;
 				for (int x = 0; x < source.GetLength(0); x++)
-					canBeCovered |= source[x, y] == 1;
+					canBeCovered |= source[x, y] != 0;
 				if (!canBeCovered)
 					return false;
 			}

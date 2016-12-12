@@ -121,7 +121,7 @@ namespace SetCoverProblem
 			_isColumnTaken[x] += count;
 			_currentCost += count;
 			for (int y = 0; y < _isRowCovered.Length; y++)
-				if (_source[x, y] == 1)
+				if (_source[x, y] != 0)
 					_isRowCovered[y] += count;
 			_index[x] = index;
 		}
