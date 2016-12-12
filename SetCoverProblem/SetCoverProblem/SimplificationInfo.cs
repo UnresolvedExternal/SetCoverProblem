@@ -36,7 +36,7 @@ namespace SetCoverProblem
 		{
 			var originalColumns = new List<int>();
 			int columnsRecovered = 0;
-			foreach (var column in columns)
+			foreach (var column in columns.OrderBy(x => x))
 			{
 				int x = column + columnsRecovered;
 				int addition;
