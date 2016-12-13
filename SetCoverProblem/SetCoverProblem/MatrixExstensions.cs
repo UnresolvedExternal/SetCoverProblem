@@ -159,5 +159,35 @@ namespace SetCoverProblem
 				}
 			return maxIndex;
 		}
+
+		public static int GetBestColumn(this int[,] source, int[] isColumnInvalid, int[] isRowInvalid,
+			double[] costs)
+		{
+			if (source == null) throw new ArgumentNullException(nameof(source));
+			if (isColumnInvalid == null) throw new ArgumentNullException(nameof(isColumnInvalid));
+			if (isRowInvalid == null) throw new ArgumentNullException(nameof(isRowInvalid));
+			if (costs == null) throw new ArgumentNullException(nameof(costs));
+
+			double max = double.MinValue;
+			int maxIndex = -1;
+			for (int x = 0; x < isColumnInvalid.Length; x++)
+				if (isColumnInvalid[x] == 0)
+				{
+					int sum = source.SumColumn(x, isColumnInvalid);
+					double value;
+					if (sum == 0)
+						value = double.MinValue;
+					else if (Math.Abs(costs[x]) < App.Default.Tolerance)
+						value = App.Default.Infinite * sum;
+					else
+						value = sum / costs[x];
+					if (value > max)
+					{
+						max = value;
+						maxIndex = x;
+					}
+				}
+			return maxIndex;
+		}
 	}
 }

@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SetCoverProblem" GeneratedClassName="App">
+  <Profiles />
+  <Settings>
+    <Setting Name="Tolerance" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">1E-06</Value>
+    </Setting>
+    <Setting Name="Infinite" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">10000000000</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
