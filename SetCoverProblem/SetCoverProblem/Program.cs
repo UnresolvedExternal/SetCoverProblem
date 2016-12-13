@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace SetCoverProblem
@@ -14,7 +15,7 @@ namespace SetCoverProblem
 				var matrix = EnterMatrix();
 				var costs = EnterCosts(matrix.GetLength(0));
 				var solution = ProblemSolver.GetSolution(matrix, costs);
-				PrintSolution(solution);
+				PrintSolution(solution, costs);
 			}
 			catch (Exception e)
 			{
@@ -24,20 +25,23 @@ namespace SetCoverProblem
 
 		private static double[] EnterCosts(int size)
 		{
+			Console.WriteLine($"Enter {size} costs: ");
 			string line = Console.ReadLine() ?? "";
 			var costs = new double[size];
 			int x = 0;
 			foreach (var match in Regex.Matches(line, @"[+-]?\d+(\.\d+)?").Cast<Match>())
-				costs[x++] = double.Parse(match.Value);
+				costs[x++] = double.Parse(match.Value, CultureInfo.InvariantCulture.NumberFormat);
 			if (x != size)
 				throw new Exception("Invalid input");
 			return costs;
 		}
 
-		private static void PrintSolution(List<int> solution)
+		private static void PrintSolution(List<int> solution, double[] costs)
 		{
 			Console.Write("Best solution is: ");
 			Console.WriteLine(solution == null ? "<none>" : string.Join(", ", solution.Select(x => x + 1)));
+			Console.Write("Cost of the solution: ");
+			Console.WriteLine(solution?.Sum(e => costs[e]).ToString(CultureInfo.InvariantCulture) ?? "Infinite");
 		}
 
 		private static int[,] EnterMatrix()
