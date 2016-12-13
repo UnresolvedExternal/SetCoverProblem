@@ -5,7 +5,7 @@ namespace SetCoverProblem
 {
 	public static class ProblemSolver
 	{
-		public static List<int> GetSolution(int[,] source)
+		public static List<int> GetSolution(int[,] source, double[] costs = null)
 		{
 			if (source == null) throw new ArgumentNullException(nameof(source));
 
