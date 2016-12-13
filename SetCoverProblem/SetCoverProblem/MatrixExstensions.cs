@@ -173,7 +173,7 @@ namespace SetCoverProblem
 			for (int x = 0; x < isColumnInvalid.Length; x++)
 				if (isColumnInvalid[x] == 0)
 				{
-					int sum = source.SumColumn(x, isColumnInvalid);
+					int sum = source.SumColumn(x, isRowInvalid);
 					double value;
 					if (sum == 0)
 						value = double.MinValue;
