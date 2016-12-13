@@ -110,8 +110,8 @@ namespace SetCoverProblem
 			if (x == -1)
 				return double.MaxValue;
 			int sum = _source.SumColumn(x, _isRowCovered);
-			int minColumns = uncoveredRows / sum;
-			threshold += minColumns * _costs[x];
+			double rowCost = _costs[x] / sum;
+			threshold += rowCost * uncoveredRows;
 			return threshold;
 		}
 

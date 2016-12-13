@@ -176,8 +176,8 @@ namespace SetCoverProblem
 					int sum = source.SumColumn(x, isRowInvalid);
 					double value;
 					if (sum == 0)
-						value = double.MinValue;
-					else if (Math.Abs(costs[x]) < App.Default.Tolerance)
+						continue;
+					if (Math.Abs(costs[x]) < App.Default.Tolerance)
 						value = App.Default.Infinite * sum;
 					else
 						value = sum / costs[x];
