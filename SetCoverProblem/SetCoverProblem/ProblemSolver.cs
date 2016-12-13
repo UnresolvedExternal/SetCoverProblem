@@ -13,7 +13,7 @@ namespace SetCoverProblem
 				return null;
 			var simplificationInfo = new Simplificator(source, costs).GetSimplificationInfo();
 			var simplifiedMatrix = simplificationInfo.ApplySimplification(source);
-			var greedySolution = new GreedyAlgorithm(simplifiedMatrix).GetSolution();
+			var greedySolution = new GreedyAlgorithm(simplifiedMatrix, costs).GetSolution();
 			var solution = new MainAlgorithm(source, greedySolution).GetSolution();
 			return simplificationInfo.GetOriginalSolution(solution);
 		}

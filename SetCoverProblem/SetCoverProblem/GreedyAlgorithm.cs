@@ -8,19 +8,21 @@ namespace SetCoverProblem
 		private readonly int[,] _source;
 		private readonly int[] _isColumnTaken;
 		private readonly int[] _isRowCovered;
+		private readonly double[] _costs;
 
-		public GreedyAlgorithm(int[,] source)
+		public GreedyAlgorithm(int[,] source, double[] costs)
 		{
 			_source = source;
 			_isColumnTaken = new int[source.GetLength(0)];
 			_isRowCovered = new int[source.GetLength(1)];
+			_costs = costs ?? Enumerable.Repeat(1.0, _isColumnTaken.Length).ToArray();
 		}
 
 		public List<int> GetSolution()
 		{
 			while (!IsCovered())
 			{
-				int x = _source.GetMaxSumColumn(_isColumnTaken, _isRowCovered);
+				int x = _source.GetBestColumn(_isColumnTaken, _isRowCovered, _costs);
 				_isColumnTaken[x] = 1;
 				for (int y = 0; y < _isRowCovered.Length; y++)
 					if (_source[x, y] != 0)
