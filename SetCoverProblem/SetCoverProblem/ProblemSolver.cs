@@ -11,7 +11,7 @@ namespace SetCoverProblem
 
 			if (!HasSolution(source))
 				return null;
-			var simplificationInfo = new Simplificator(source).GetSimplificationInfo();
+			var simplificationInfo = new Simplificator(source, costs).GetSimplificationInfo();
 			var simplifiedMatrix = simplificationInfo.ApplySimplification(source);
 			var greedySolution = new GreedyAlgorithm(simplifiedMatrix).GetSolution();
 			var solution = new MainAlgorithm(source, greedySolution).GetSolution();

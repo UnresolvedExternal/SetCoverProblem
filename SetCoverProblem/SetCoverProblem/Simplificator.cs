@@ -14,14 +14,16 @@ namespace SetCoverProblem
 	public class Simplificator
 	{
 		private readonly int[,] _source;
+		private readonly double[] _costs;
 		private readonly bool[] _rowsCovered;
 		private readonly ColumnInfo[] _columnsInfo;
 
-		public Simplificator(int[,] source)
+		public Simplificator(int[,] source, double[] costs = null)
 		{
 			if (source == null) throw new ArgumentNullException(nameof(source));
 
 			_source = source;
+			_costs = costs ?? Enumerable.Repeat(1.0, _source.GetLength(0)).ToArray();
 			_rowsCovered = new bool[source.GetLength(1)];
 			_columnsInfo = new ColumnInfo[source.GetLength(0)];
 		}
@@ -40,6 +42,7 @@ namespace SetCoverProblem
 			modified |= ExcludeSupersetRows();
 			modified |= ExcludeSubsetColumns();
 			modified |= CoverOneUnitRows();
+			modified |= ExcludeZeroColumns();
 			return modified;
 		}
 
@@ -119,13 +122,27 @@ namespace SetCoverProblem
 				{
 					if (_columnsInfo[xTwo] != ColumnInfo.Unknown)
 						continue;
-					if (xOne != xTwo && _source.IsColumnOneSupersetOfColumnTwo(xOne, xTwo, isRowInvalid))
+					if (xOne != xTwo && _costs[xTwo] >= _costs[xOne] &&
+						_source.IsColumnOneSupersetOfColumnTwo(xOne, xTwo, isRowInvalid))
 					{
 						modified = true;
 						ExcludeColumn(xTwo, false);
 					}
 				}
 			}
+			return modified;
+		}
+
+		private bool ExcludeZeroColumns()
+		{
+			bool modified = false;
+			int[] isRowInvalid = _rowsCovered.Select(covered => covered ? 1 : 0).ToArray();
+			for (int x = 0; x < _source.GetLength(0); x++)
+				if (_columnsInfo[x] == ColumnInfo.Unknown && _source.SumColumn(x, isRowInvalid) == 0)
+				{
+					ExcludeColumn(x, false);
+					modified = true;
+				}
 			return modified;
 		}
 
